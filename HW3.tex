@@ -10,7 +10,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{multirow}
 \title{Homework3}
-\author{21307099 liyingjun}
+\author{21307099 李英骏}
 \date{2023.11.1}
 \begin{document}
 \maketitle
@@ -150,6 +150,7 @@ Time & Name & Busy & Op & \(F_i\) & \(F_j\) & \(F_k\) & \(Q_j\) & \(Q_k\) & \(R_
 
 \subsection*{(a)}
 When a hit occurs, it directly leads to executing the next instruction without any delay, effectively decreasing the cycle count by one per branch instruction. Therefore, the penalty adjustment for a buffer hit with an unconditional branch is:
+
 \begin{equation*}
     \text{Penalty adjustment for buffer hit} = -1 \text{ clock cycle per unconditional branch instruction}
 \end{equation*}
@@ -186,9 +187,9 @@ The overall performance gain due to the BTB enhancement is:
     \text{Overall performance gain} = (0.04 - (-0.04)) \text{ cycles per instruction}= 0.08 \text{ cycles per instruction improvement}
 \end{equation*}
 
+
 \newpage
 \section{Problem 5}
-
 
 \begin{table}[h!]
 \centering
