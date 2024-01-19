@@ -1,0 +1,941 @@
+
+cycle : 1
+              busy  instruction                        states_name   dest  value
+entry1       : Yes , LD, F6, 34, R2                  , issue        , F6  ,     ;
+entry2       : No  , LD, F2, 45, R3                  , issue        , F2  ,     ;
+entry3       : No  , MULTD, F0, F2, F4               , issue        , F0  ,     ;
+entry4       : No  , SUBD, F8, F6, F2                , issue        , F8  ,     ;
+entry5       : No  , DIVD, F10, F0, F6               , issue        , F10 ,     ;
+entry6       : No  , ADDD, F6, F8, F2                , issue        , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : Yes , LD      , 34                            , 9                             ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:0  , F7:   , F8:   , F9:   , F10:   , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:No , 
+
+ 
+ 
+ 
+ 
+
+
+cycle : 2
+              busy  instruction                        states_name   dest  value
+entry1       : Yes , LD, F6, 34, R2                  , execute      , F6  ,     ;
+entry2       : Yes , LD, F2, 45, R3                  , issue        , F2  ,     ;
+entry3       : No  , MULTD, F0, F2, F4               , issue        , F0  ,     ;
+entry4       : No  , SUBD, F8, F6, F2                , issue        , F8  ,     ;
+entry5       : No  , DIVD, F10, F0, F6               , issue        , F10 ,     ;
+entry6       : No  , ADDD, F6, F8, F2                , issue        , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : Yes , LD      , 34                            , 9                             ,    ,    , 0   ;
+load2 : Yes , LD      , 45                            , 41                            ,    ,    , 1   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+registers_name : F0:   , F1:   , F2:1  , F3:   , F4:   , F5:   , F6:0  , F7:   , F8:   , F9:   , F10:   , 
+registers_state : F0:No , F1:No , F2:Yes, F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:No , 
+
+ 
+ 
+ 
+ 
+
+
+
+cycle : 3
+              busy  instruction                        states_name   dest  value
+entry1       : Yes , LD, F6, 34, R2                  , execute      , F6  ,     ;
+entry2       : Yes , LD, F2, 45, R3                  , execute      , F2  ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , issue        , F0  ,     ;
+entry4       : No  , SUBD, F8, F6, F2                , issue        , F8  ,     ;
+entry5       : No  , DIVD, F10, F0, F6               , issue        , F10 ,     ;
+entry6       : No  , ADDD, F6, F8, F2                , issue        , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : Yes , LD      , 45                            , 41                            ,    ,    , 1   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   ,                               , 16                            , 1  ,    , 2   ;
+mult2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+registers_name : F0:2  , F1:   , F2:1  , F3:   , F4:   , F5:   , F6:0  , F7:   , F8:   , F9:   , F10:   , 
+registers_state : F0:Yes, F1:No , F2:Yes, F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:No , 
+
+
+
+
+
+cycle : 4
+              busy  instruction                        states_name   dest  value
+entry1       : Yes , LD, F6, 34, R2                  , write result , F6  , 46  ;
+entry2       : Yes , LD, F2, 45, R3                  , execute      , F2  ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , issue        , F8  ,     ;
+entry5       : No  , DIVD, F10, F0, F6               , issue        , F10 ,     ;
+entry6       : No  , ADDD, F6, F8, F2                , issue        , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : Yes , SUBD    , 46                            ,                               ,    , 1  , 3   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   ,                               , 16                            , 1  ,    , 2   ;
+mult2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+registers_name : F0:2  , F1:   , F2:1  , F3:   , F4:   , F5:   , F6:0  , F7:   , F8:3  , F9:   , F10:   , 
+registers_state : F0:Yes, F1:No , F2:Yes, F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:No , 
+
+aAAAAAAA 3
+delay 0
+delay 0
+delay 0
+delay 0
+delay 0
+delay 0
+delay 0
+
+
+
+
+
+cycle : 5
+              busy  instruction                        states_name   dest  value
+entry1       : Yes , LD, F6, 34, R2                  , commit       , F6  , 46  ;
+entry2       : Yes , LD, F2, 45, R3                  , write result , F2  , 45  ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , execute      , F8  ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , issue        , F10 ,     ;
+entry6       : No  , ADDD, F6, F8, F2                , issue        , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : Yes , SUBD    , 46                            , 45                            ,    ,    , 3   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:1  , F3:   , F4:   , F5:   , F6:   , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:Yes, F3:No , F4:No , F5:No , F6:No , F7:No , F8:Yes, F9:No , F10:Yes, 
+
+aAAAAAAA 3
+delay 1
+delay 1
+delay 1
+delay 1
+delay 1
+delay 1
+delay 1
+
+
+
+
+
+cycle : 6
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : Yes , LD, F2, 45, R3                  , commit       , F2  , 45  ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , execute      , F8  ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , issue        , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : Yes , SUBD    , 46                            , 45                            ,    ,    , 3   ;
+add 2 : Yes , ADDD    ,                               , 45                            , 3  ,    , 5   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+aAAAAAAA 3
+aAAAAAAA 5
+delay 2
+delay 2
+delay 2
+delay 2
+delay 2
+delay 2
+delay 2
+
+
+
+
+cycle : 7
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , execute      , F8  ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , execute      , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : Yes , SUBD    , 46                            , 45                            ,    ,    , 3   ;
+add 2 : Yes , ADDD    ,                               , 45                            , 3  ,    , 5   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+aAAAAAAA 5
+delay 3
+delay 3
+delay 3
+delay 3
+delay 3
+delay 3
+delay 3
+
+
+
+
+cycle : 8
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , execute      , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : Yes , ADDD    , 1                             , 45                            ,    ,    , 5   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+aAAAAAAA 5
+delay 4
+delay 4
+delay 4
+delay 4
+delay 4
+delay 4
+delay 4
+
+
+
+
+cycle : 9
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , execute      , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : Yes , ADDD    , 1                             , 45                            ,    ,    , 5   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+aAAAAAAA 5
+delay 5
+delay 5
+delay 5
+delay 5
+delay 5
+delay 5
+delay 5
+
+
+
+
+cycle : 10
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , execute      , F6  ,     ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : Yes , ADDD    , 1                             , 45                            ,    ,    , 5   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+delay 6
+delay 6
+delay 6
+delay 6
+delay 6
+delay 6
+delay 6
+
+
+
+
+cycle : 11
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+delay 7
+delay 7
+delay 7
+delay 7
+delay 7
+delay 7
+delay 7
+
+
+
+
+cycle : 12
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+delay 8
+delay 8
+delay 8
+delay 8
+delay 8
+delay 8
+delay 8
+
+
+
+
+cycle : 13
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+delay 9
+delay 9
+delay 9
+delay 9
+delay 9
+delay 9
+delay 9
+
+
+
+
+cycle : 14
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+
+
+
+
+cycle : 15
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , execute      , F0  ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : Yes , MULTD   , 45                            , 16                            ,    ,    , 2   ;
+mult2 : Yes , DIVD    ,                               , 46                            , 2  ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+
+
+
+
+cycle : 16
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , write result , F0  , 720 ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:2  , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:Yes, F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+
+
+
+
+cycle : 17
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : Yes , MULTD, F0, F2, F4               , commit       , F0  , 720 ;
+entry4       : Yes , SUBD, F8, F6, F2                , write result , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:3  , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:Yes, F9:No , F10:Yes, 
+
+
+
+
+cycle : 18
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : Yes , SUBD, F8, F6, F2                , commit       , F8  , 1   ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 19
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 20
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 21
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 22
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 23
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 24
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 25
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 26
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 27
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 28
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 29
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 30
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 31
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 32
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 33
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 34
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 35
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 36
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , execute      , F10 ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : Yes , DIVD    , 720                           , 46                            ,    ,    , 4   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 37
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , write result , F10 , 15.652173913043478;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:4  , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:Yes, 
+
+
+
+cycle : 38
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : Yes , DIVD, F10, F0, F6               , commit       , F10 , 15.652173913043478;
+entry6       : Yes , ADDD, F6, F8, F2                , write result , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:5  , F7:   , F8:   , F9:   , F10:   , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:Yes, F7:No , F8:No , F9:No , F10:No , 
+
+
+cycle : 39
+              busy  instruction                        states_name   dest  value
+entry1       : No  ,                                 , issue        ,     ,     ;
+entry2       : No  ,                                 , issue        ,     ,     ;
+entry3       : No  ,                                 , issue        ,     ,     ;
+entry4       : No  ,                                 , issue        ,     ,     ;
+entry5       : No  ,                                 , issue        ,     ,     ;
+entry6       : Yes , ADDD, F6, F8, F2                , commit       , F6  , 46  ;
+        busy  op       Vj                              Vk                              Qj   Qk  dest
+load1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+load2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+add 3 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult1 : No  ,         ,                               ,                               ,    ,    , 0   ;
+mult2 : No  ,         ,                               ,                               ,    ,    , 0   ;
+registers_name : F0:   , F1:   , F2:   , F3:   , F4:   , F5:   , F6:   , F7:   , F8:   , F9:   , F10:   , 
+registers_state : F0:No , F1:No , F2:No , F3:No , F4:No , F5:No , F6:No , F7:No , F8:No , F9:No , F10:No , 
+
+Finally result :
+['LD', 'F6', 34, 'R2'] : [1, 3, 4, 5] 46
+['LD', 'F2', 45, 'R3'] : [2, 4, 5, 6] 45
+['MULTD', 'F0', 'F2', 'F4'] : [3, 15, 16, 17] 720
+['SUBD', 'F8', 'F6', 'F2'] : [4, 7, 8, 18] 1
+['DIVD', 'F10', 'F0', 'F6'] : [5, 36, 37, 38] 15.652173913043478
+['ADDD', 'F6', 'F8', 'F2'] : [6, 10, 11, 39] 46
